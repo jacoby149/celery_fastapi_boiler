@@ -8,22 +8,36 @@ from celery_tasks.tests.tasks import task_with_redis_id_lock
 router = APIRouter()
 
 class TestCeleryInput(BaseModel):
-    submission_id: int
+    job_id: int
     wait_time: int
 
 test_inputs = [
-    TestCeleryInput(submission_id=1, wait_time=1),
-    TestCeleryInput(submission_id=2, wait_time=1),
+    TestCeleryInput(job_id=1, wait_time=1),
+    TestCeleryInput(job_id=2, wait_time=1),
+    TestCeleryInput(job_id=3, wait_time=1),
+    TestCeleryInput(job_id=4, wait_time=1),
+    TestCeleryInput(job_id=1, wait_time=1),
+    TestCeleryInput(job_id=2, wait_time=1),
+    TestCeleryInput(job_id=3, wait_time=1),
+    TestCeleryInput(job_id=4, wait_time=1),
+    TestCeleryInput(job_id=1, wait_time=1),
+    TestCeleryInput(job_id=2, wait_time=1),
+    TestCeleryInput(job_id=3, wait_time=1),
+    TestCeleryInput(job_id=4, wait_time=1),
+    TestCeleryInput(job_id=1, wait_time=1),
+    TestCeleryInput(job_id=2, wait_time=1),
+    TestCeleryInput(job_id=3, wait_time=1),
+    TestCeleryInput(job_id=4, wait_time=1),
 ]
 
 @router.post("/no_celery/bad")
-async def no_celery(test_input: TestCeleryInput):
+async def no_celery():
     """
     to test triggering a celery task with an api endpoint.
     this is how a webhook will do its thing!
     """
     for test_input in test_inputs:
-        wait_and_print_job_id(test_input.model_dump())
+        wait_and_print_job_id(**test_input.model_dump())
     return "success all processed!"
 
 @router.post("/simple_celery")
