@@ -7,10 +7,11 @@ def start_celery_worker():
             "pipenv",
             "run",
             "celery",
+            "-q",
             "-A",
             "celery_starter.celery_app",
             "worker",
-            "--loglevel=info"
+            "--loglevel=info",
             ]    
     )
 

@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
+watchgod = "*"
+redis = "*"
+celery = "*"
 
 [dev-packages]
 
