@@ -1,5 +1,5 @@
 # Dockerfile for the python based API for neptune
-FROM python:3.12-bullseye
+FROM python:3.13-bullseye
 
 WORKDIR /api
 
